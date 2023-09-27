@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cooksy.components.DividerSpecial
@@ -38,7 +39,7 @@ fun WelcomeScreen() {
         Spacer(modifier = Modifier.height(30.dp))
         SectionButtons()
         Spacer(modifier = Modifier.height(15.dp))
-        DividerSpecial()
+        DividerSpecial("O", Color(0xFF0D2D44))
         Spacer(modifier = Modifier.height(15.dp))
         GoogleButton()
     }

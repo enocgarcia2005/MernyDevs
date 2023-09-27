@@ -1,5 +1,6 @@
 package com.example.cooksy.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -8,14 +9,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
 fun SecondaryButton(modifier: Modifier = Modifier, text:String) {
     OutlinedButton(
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.background
+        colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = Color.Transparent,
+            contentColor = Color(0xFF0D2D44)
         ),
+        border = BorderStroke(1.dp, Color(0xFF0D2D44)),
         onClick = { },
         modifier = modifier
     ) {

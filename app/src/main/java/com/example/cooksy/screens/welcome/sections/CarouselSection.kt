@@ -44,7 +44,7 @@ fun CarouselSection(pagerState:PagerState,scope: CoroutineScope) {
         count = SliderItemList.list.size,
         state = pagerState,
         verticalAlignment = Alignment.Top,
-        modifier = Modifier.height(220.dp)
+        modifier = Modifier.height(200.dp)
     ) {page ->
         Card(
             colors = CardDefaults.cardColors(
@@ -79,32 +79,31 @@ fun CarouselSection(pagerState:PagerState,scope: CoroutineScope) {
 
                     )
             }
-            Spacer(modifier = Modifier.height(30.dp))
-            Row (
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ){
-                repeat(SliderItemList.list.size){
-                    val color = if (pagerState.currentPage == it) Color(0xFF0D2D44) else Color.White
-                    Box(
-                        modifier = Modifier
-                            .padding(4.dp)
-                            .clip(CircleShape)
-                            .size(9.dp)
-                            .background(color)
-                            .border(1.dp, Color(0xFF0D2D44), CircleShape)
-                            .clickable {
-                                scope.launch {
-                                    pagerState.animateScrollToPage(it)
-                                }
-                            }
-                    ){
 
+        }
+    }
+    Spacer(modifier = Modifier.height(30.dp))
+    Row (
+        horizontalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxWidth()
+    ){
+        repeat(SliderItemList.list.size){
+            val color = if (pagerState.currentPage == it)  MaterialTheme.colorScheme.primary else Color.White
+            Box(
+                modifier = Modifier
+                    .padding(4.dp)
+                    .clip(CircleShape)
+                    .size(9.dp)
+                    .background(color)
+                    .border(1.dp, MaterialTheme.colorScheme.primary, CircleShape)
+                    .clickable {
+                        scope.launch {
+                            pagerState.animateScrollToPage(it)
+                        }
                     }
-                }
+            ){
+
             }
         }
-
-
     }
 }
