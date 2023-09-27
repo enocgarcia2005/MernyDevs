@@ -64,6 +64,11 @@ dependencies {
     //Navigation
     implementation("androidx.navigation:navigation-compose:2.5.3")
 
+    //Carousel
+    implementation("com.google.accompanist:accompanist-pager:0.20.0")
+    implementation("androidx.compose.ui:ui-util")
+
+
     //Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
