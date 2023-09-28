@@ -10,12 +10,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PrimaryButton(modifier: Modifier = Modifier, text:String) {
+fun PrimaryButton(
+    modifier: Modifier = Modifier,
+    text:String,
+    onClick: () -> Unit
+) {
     Button(
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF0D2D44)
         ),
-        onClick = { },
+        onClick =  onClick,
         modifier = modifier
     ) {
         Text(

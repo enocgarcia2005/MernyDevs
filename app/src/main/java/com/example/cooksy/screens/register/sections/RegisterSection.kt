@@ -53,7 +53,7 @@ fun RegisterSection() {
         TextFieldLogin(placeHolder = "Contraseña", icon = Icons.Filled.Lock)
         Spacer(modifier = Modifier.height(20.dp))
         TextFieldLogin(placeHolder = "Confirmar Contraseña", icon = Icons.Filled.Lock)
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start,
@@ -75,11 +75,13 @@ fun RegisterSection() {
                 color = Color.White
             )
         }
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         PrimaryButton(
             text = "Registrarse",
             modifier = Modifier.fillMaxWidth()
-        )
+        ){
+
+        }
         Spacer(modifier = Modifier.height(10.dp))
         DividerSpecial(
             text = "ya tienes cuenta?",
@@ -89,6 +91,8 @@ fun RegisterSection() {
         SecondaryButton(
             text = "Iniciar Sesión",
             modifier = Modifier.fillMaxWidth()
-        )
+        ){
+
+        }
     }
 }

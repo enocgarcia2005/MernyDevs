@@ -7,17 +7,23 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.cooksy.components.PrimaryButton
 import com.example.cooksy.components.SecondaryButton
+import com.example.cooksy.navigation.LoginScreens
 
 @Composable
-fun SectionButtons() {
+fun SectionButtons(navHostController: NavHostController) {
     Row (
         modifier = Modifier.fillMaxWidth()
     ){
-        PrimaryButton(text = "Iniciar Sesión", modifier = Modifier.weight(1f))
+        PrimaryButton(text = "Iniciar Sesión", modifier = Modifier.weight(1f)){
+            navHostController.navigate(LoginScreens.Login.route)
+        }
         Spacer(modifier = Modifier.width(36.dp))
-        SecondaryButton(text = "Registrarse", modifier = Modifier.weight(1f))
+        SecondaryButton(text = "Registrarse", modifier = Modifier.weight(1f)){
+            navHostController.navigate(LoginScreens.Register.route)
+        }
 
     }
 }

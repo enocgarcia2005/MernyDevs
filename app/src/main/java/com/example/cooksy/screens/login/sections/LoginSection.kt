@@ -57,7 +57,9 @@ fun LoginSection() {
         PrimaryButton(
             text = "Iniciar Sesión",
             modifier = Modifier.fillMaxWidth()
-        )
+        ){
+
+        }
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "Has olvidado tu contraseña?",
@@ -75,6 +77,8 @@ fun LoginSection() {
         SecondaryButton(
             text = "Registrarse",
             modifier = Modifier.fillMaxWidth()
-        )
+        ){
+            
+        }
     }
 }
