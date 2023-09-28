@@ -21,13 +21,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.cooksy.components.DividerSpecial
 import com.example.cooksy.components.PrimaryButton
 import com.example.cooksy.components.SecondaryButton
 import com.example.cooksy.components.TextFieldLogin
+import com.example.cooksy.navigation.LoginScreens
+import com.example.cooksy.screens.login.LoginScreenViewModel
 
 @Composable
-fun LoginSection() {
+fun LoginSection(email:String,password:String,navHostController: NavHostController,viewModel: LoginScreenViewModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -46,19 +49,27 @@ fun LoginSection() {
         Spacer(modifier = Modifier.height(40.dp))
         TextFieldLogin(
             placeHolder = "Usuario",
-            icon = Icons.Filled.AccountCircle
-        )
+            icon = Icons.Filled.AccountCircle,
+            value = email
+        ){
+            viewModel.onLoginChanged(it, password)
+        }
         Spacer(modifier = Modifier.height(30.dp))
         TextFieldLogin(
             placeHolder = "Contraseña",
-            icon = Icons.Filled.Lock
-        )
+            icon = Icons.Filled.Lock,
+            value = password
+        ) {
+            viewModel.onLoginChanged(email, it)
+        }
         Spacer(modifier = Modifier.height(36.dp))
         PrimaryButton(
             text = "Iniciar Sesión",
             modifier = Modifier.fillMaxWidth()
         ){
-
+            viewModel.logIn(email,password){
+                navHostController.navigate(LoginScreens.Welcome.route)
+            }
         }
         Spacer(modifier = Modifier.height(10.dp))
         Text(

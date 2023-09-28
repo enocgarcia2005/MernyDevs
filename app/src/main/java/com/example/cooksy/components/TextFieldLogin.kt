@@ -2,8 +2,6 @@ package com.example.cooksy.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -18,10 +16,15 @@ import androidx.compose.ui.text.input.KeyboardType
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextFieldLogin(placeHolder:String,icon:ImageVector) {
+fun TextFieldLogin(
+    placeHolder:String,
+    icon:ImageVector,
+    value:String,
+    onValueChange: (String) -> Unit
+) {
     TextField(
-        value = "",
-        onValueChange = {},
+        value = value,
+        onValueChange = onValueChange,
         leadingIcon = {
             Icon(
                 imageVector = icon,

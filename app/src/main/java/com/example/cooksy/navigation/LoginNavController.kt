@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cooksy.screens.login.LoginScreen
+import com.example.cooksy.screens.login.LoginScreenViewModel
 import com.example.cooksy.screens.register.RegisterScreen
 import com.example.cooksy.screens.welcome.WelcomeScreen
 
@@ -18,7 +19,7 @@ fun LoginNavController(navController: NavHostController, modifier: Modifier = Mo
             WelcomeScreen(modifier, navController)
         }
          composable(LoginScreens.Login.route){
-            LoginScreen(modifier, navController)
+            LoginScreen(modifier, navController, LoginScreenViewModel())
         }
          composable(LoginScreens.Register.route){
             RegisterScreen(modifier, navController)

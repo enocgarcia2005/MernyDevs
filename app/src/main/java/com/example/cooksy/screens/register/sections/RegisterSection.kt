@@ -48,11 +48,17 @@ fun RegisterSection() {
             color = Color.White
         )
         Spacer(modifier = Modifier.height(30.dp))
-        TextFieldLogin(placeHolder = "Usuario", icon = Icons.Filled.AccountCircle)
+        TextFieldLogin(placeHolder = "Usuario", icon = Icons.Filled.AccountCircle, value = ""){
+
+        }
         Spacer(modifier = Modifier.height(20.dp))
-        TextFieldLogin(placeHolder = "Contraseña", icon = Icons.Filled.Lock)
+        TextFieldLogin(placeHolder = "Contraseña", icon = Icons.Filled.Lock,value = ""){
+
+        }
         Spacer(modifier = Modifier.height(20.dp))
-        TextFieldLogin(placeHolder = "Confirmar Contraseña", icon = Icons.Filled.Lock)
+        TextFieldLogin(placeHolder = "Confirmar Contraseña", icon = Icons.Filled.Lock,value = ""){
+
+        }
         Spacer(modifier = Modifier.height(10.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
