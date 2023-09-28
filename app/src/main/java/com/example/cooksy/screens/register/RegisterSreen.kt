@@ -1,4 +1,4 @@
-package com.example.cooksy.screens.login
+package com.example.cooksy.screens.register
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,24 +9,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cooksy.components.WelcomeLoginSection
-import com.example.cooksy.screens.login.sections.LoginSection
+import com.example.cooksy.screens.register.sections.RegisterSection
 import com.example.cooksy.ui.theme.CooksyTheme
 
 @Composable
-fun LoginScreen() {
-    Column( modifier =  Modifier.fillMaxSize()) {
-        WelcomeLoginSection(text = "Bienvenido \n de vuelta")
-        Spacer(modifier = Modifier.height(30.dp))
-        LoginSection()
+fun RegisterScreen() {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        WelcomeLoginSection(text = "Bienvenido \n a Cooksy")
+        Spacer(modifier = Modifier.height(10.dp))
+        RegisterSection()
     }
 }
 
-
-
 @Preview(showSystemUi = true)
 @Composable
-fun LoginScreenPreview() {
+fun RegisterScreenPreview() {
     CooksyTheme {
-        LoginScreen()
+        RegisterScreen()
     }
 }
