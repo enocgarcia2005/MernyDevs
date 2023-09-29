@@ -15,7 +15,11 @@ import com.example.cooksy.components.WelcomeLoginSection
 import com.example.cooksy.screens.login.sections.LoginSection
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier, navHostController: NavHostController,viewModel:LoginScreenViewModel) {
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController,
+    viewModel:LoginScreenViewModel
+) {
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
 

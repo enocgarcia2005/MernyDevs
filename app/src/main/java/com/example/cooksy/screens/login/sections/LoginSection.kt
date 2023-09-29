@@ -30,7 +30,11 @@ import com.example.cooksy.navigation.LoginScreens
 import com.example.cooksy.screens.login.LoginScreenViewModel
 
 @Composable
-fun LoginSection(email:String,password:String,navHostController: NavHostController,viewModel: LoginScreenViewModel) {
+fun LoginSection(
+    email:String,
+    password:String,
+    navHostController: NavHostController,
+    viewModel: LoginScreenViewModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -50,7 +54,9 @@ fun LoginSection(email:String,password:String,navHostController: NavHostControll
         TextFieldLogin(
             placeHolder = "Usuario",
             icon = Icons.Filled.AccountCircle,
-            value = email
+            value = email,
+            isError = false,
+            errorMessage = ""
         ){
             viewModel.onLoginChanged(it, password)
         }
@@ -58,7 +64,9 @@ fun LoginSection(email:String,password:String,navHostController: NavHostControll
         TextFieldLogin(
             placeHolder = "Contraseña",
             icon = Icons.Filled.Lock,
-            value = password
+            value = password,
+            isError = false,
+            errorMessage = ""
         ) {
             viewModel.onLoginChanged(email, it)
         }

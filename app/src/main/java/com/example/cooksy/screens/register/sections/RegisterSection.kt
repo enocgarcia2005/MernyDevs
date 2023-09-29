@@ -25,13 +25,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.cooksy.components.DividerSpecial
 import com.example.cooksy.components.PrimaryButton
 import com.example.cooksy.components.SecondaryButton
 import com.example.cooksy.components.TextFieldLogin
+import com.example.cooksy.navigation.LoginScreens
+import com.example.cooksy.screens.login.LoginScreenViewModel
 
 @Composable
-fun RegisterSection() {
+fun RegisterSection(
+    email:String,
+    password:String,
+    confirmPassword:String,
+    navHostController: NavHostController,
+    isError: Boolean,
+    viewModel: LoginScreenViewModel
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -48,16 +58,32 @@ fun RegisterSection() {
             color = Color.White
         )
         Spacer(modifier = Modifier.height(30.dp))
-        TextFieldLogin(placeHolder = "Usuario", icon = Icons.Filled.AccountCircle, value = ""){
-
+        TextFieldLogin(
+            placeHolder = "Correo",
+            icon = Icons.Filled.AccountCircle,
+            value = email,
+            isError = false,
+            errorMessage = "La cuenta ya existe"){
+            viewModel.onLoginChanged(it, password)
         }
         Spacer(modifier = Modifier.height(20.dp))
-        TextFieldLogin(placeHolder = "Contraseña", icon = Icons.Filled.Lock,value = ""){
-
+        TextFieldLogin(
+            placeHolder = "Contraseña",
+            icon = Icons.Filled.Lock,
+            value = password,
+            isError = isError,
+            errorMessage = "La contraseña no coincide"
+        ){
+            viewModel.onLoginChanged(email, it)
         }
         Spacer(modifier = Modifier.height(20.dp))
-        TextFieldLogin(placeHolder = "Confirmar Contraseña", icon = Icons.Filled.Lock,value = ""){
-
+        TextFieldLogin(
+            placeHolder = "Confirmar Contraseña",
+            icon = Icons.Filled.Lock,
+            value = confirmPassword,
+            isError = isError,
+            errorMessage = "La contraseña no coincide"){
+            viewModel.onConfirmPasswordChange(it)
         }
         Spacer(modifier = Modifier.height(10.dp))
         Row(
@@ -71,8 +97,6 @@ fun RegisterSection() {
                 colors = RadioButtonDefaults.colors(
                     unselectedColor = Color.White
                 ),
-
-
                 )
             Text(
                 text = "Acepto los terminos y condiciones de uso",
@@ -86,7 +110,14 @@ fun RegisterSection() {
             text = "Registrarse",
             modifier = Modifier.fillMaxWidth()
         ){
-
+            if (password == confirmPassword){
+                viewModel.isNotError()
+                viewModel.register(email,password){
+                    navHostController.navigate(LoginScreens.Welcome.route)
+                }
+            }else{
+                viewModel.isError()
+            }
         }
         Spacer(modifier = Modifier.height(10.dp))
         DividerSpecial(

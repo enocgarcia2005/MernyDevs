@@ -22,7 +22,7 @@ fun LoginNavController(navController: NavHostController, modifier: Modifier = Mo
             LoginScreen(modifier, navController, LoginScreenViewModel())
         }
          composable(LoginScreens.Register.route){
-            RegisterScreen(modifier, navController)
+            RegisterScreen(modifier, navController,LoginScreenViewModel())
         }
     }
 }

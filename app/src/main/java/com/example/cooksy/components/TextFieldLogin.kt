@@ -20,6 +20,8 @@ fun TextFieldLogin(
     placeHolder:String,
     icon:ImageVector,
     value:String,
+    isError:Boolean,
+    errorMessage:String,
     onValueChange: (String) -> Unit
 ) {
     TextField(
@@ -41,6 +43,14 @@ fun TextFieldLogin(
             )
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        isError = isError,
         modifier = Modifier.fillMaxWidth()
     )
+
+    if (isError){
+        Text(
+            text = errorMessage,
+            color = MaterialTheme.colorScheme.error
+        )
+    }
 }
