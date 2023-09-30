@@ -25,6 +25,11 @@ fun RegisterScreen(
     val password: String by viewModel.password.observeAsState(initial = "")
     val confirmPassword: String by viewModel.confirmPassword.observeAsState(initial = "")
     val isError: Boolean by viewModel.error.observeAsState(initial = false)
+    val isEmailValid: Boolean by viewModel.emailValid.observeAsState(initial = true)
+    val isPasswordValid: Boolean by viewModel.passwordValid.observeAsState(initial = true)
+    val isEnabled: Boolean by viewModel.enabled.observeAsState(initial = false)
+    val isActive: Boolean by viewModel.active.observeAsState(initial = false)
+    val hidden: Boolean by viewModel.hidden.observeAsState(initial = true)
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -37,6 +42,11 @@ fun RegisterScreen(
             confirmPassword = confirmPassword,
             navHostController = navHostController,
             isError = isError,
+            isEmailValid= isEmailValid,
+            isPasswordValid = isPasswordValid,
+            enabled = isEnabled,
+            active = isActive,
+            hidden = hidden,
             viewModel = viewModel
         )
     }

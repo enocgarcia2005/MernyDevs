@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +35,10 @@ fun LoginSection(
     email:String,
     password:String,
     navHostController: NavHostController,
+    enabled:Boolean,
+    isEmailValid: Boolean,
+    isPasswordValid: Boolean,
+    hidden: Boolean,
     viewModel: LoginScreenViewModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -52,31 +57,44 @@ fun LoginSection(
         )
         Spacer(modifier = Modifier.height(40.dp))
         TextFieldLogin(
-            placeHolder = "Usuario",
+            placeHolder = "Email",
             icon = Icons.Filled.AccountCircle,
             value = email,
-            isError = false,
-            errorMessage = ""
+            isError = !isEmailValid,
+            onClickHidden = {},
+            errorMessage = "Email no valido",
+            keyboardType = KeyboardType.Email
         ){
             viewModel.onLoginChanged(it, password)
+            viewModel.isEnabled()
         }
         Spacer(modifier = Modifier.height(30.dp))
         TextFieldLogin(
             placeHolder = "Contraseña",
             icon = Icons.Filled.Lock,
             value = password,
-            isError = false,
-            errorMessage = ""
+            isError = !isPasswordValid,
+            hidden = hidden,
+            onClickHidden = {viewModel.hiddenPassword(hidden)},
+            errorMessage = "minimo 8 caracteres",
+            passwordMode = true,
+            keyboardType = KeyboardType.Password
         ) {
             viewModel.onLoginChanged(email, it)
+            viewModel.isEnabled()
         }
         Spacer(modifier = Modifier.height(36.dp))
         PrimaryButton(
             text = "Iniciar Sesión",
+            enabled = enabled,
             modifier = Modifier.fillMaxWidth()
         ){
-            viewModel.logIn(email,password){
-                navHostController.navigate(LoginScreens.Welcome.route)
+            viewModel.isEmail(email)
+            viewModel.isPassword(password)
+            if (isEmailValid&&isPasswordValid) {
+                viewModel.logIn(email, password) {
+                    navHostController.navigate(LoginScreens.Welcome.route)
+                }
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -97,7 +115,7 @@ fun LoginSection(
             text = "Registrarse",
             modifier = Modifier.fillMaxWidth()
         ){
-            
+            navHostController.navigate(LoginScreens.Register.route)
         }
     }
 }

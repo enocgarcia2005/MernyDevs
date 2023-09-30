@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.sp
 fun PrimaryButton(
     modifier: Modifier = Modifier,
     text:String,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     Button(
@@ -20,6 +21,7 @@ fun PrimaryButton(
             containerColor = Color(0xFF0D2D44)
         ),
         onClick =  onClick,
+        enabled = enabled,
         modifier = modifier
     ) {
         Text(

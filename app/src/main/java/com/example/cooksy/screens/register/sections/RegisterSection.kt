@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,6 +41,11 @@ fun RegisterSection(
     confirmPassword:String,
     navHostController: NavHostController,
     isError: Boolean,
+    isEmailValid: Boolean,
+    isPasswordValid: Boolean,
+    enabled:Boolean,
+    active:Boolean,
+    hidden:Boolean,
     viewModel: LoginScreenViewModel
 ) {
     Column(
@@ -62,28 +68,41 @@ fun RegisterSection(
             placeHolder = "Correo",
             icon = Icons.Filled.AccountCircle,
             value = email,
-            isError = false,
-            errorMessage = "La cuenta ya existe"){
+            isError = !isEmailValid,
+            onClickHidden = {},
+            keyboardType = KeyboardType.Email,
+            errorMessage = "Email no valido"){
             viewModel.onLoginChanged(it, password)
+            viewModel.confirmPasswordEmpty()
         }
         Spacer(modifier = Modifier.height(20.dp))
         TextFieldLogin(
             placeHolder = "Contraseña",
             icon = Icons.Filled.Lock,
             value = password,
-            isError = isError,
-            errorMessage = "La contraseña no coincide"
+            isError = isError || !isPasswordValid,
+            onClickHidden = {viewModel.hiddenPassword(hidden)},
+            hidden = hidden ,
+            keyboardType = KeyboardType.Password,
+            passwordMode = true,
+            errorMessage = if(!isPasswordValid)"Minimo 8 caracteres" else "La contraseña no coincide"
         ){
             viewModel.onLoginChanged(email, it)
+            viewModel.confirmPasswordEmpty()
         }
         Spacer(modifier = Modifier.height(20.dp))
         TextFieldLogin(
             placeHolder = "Confirmar Contraseña",
             icon = Icons.Filled.Lock,
             value = confirmPassword,
-            isError = isError,
-            errorMessage = "La contraseña no coincide"){
+            isError = isError || !isPasswordValid,
+            onClickHidden = {viewModel.hiddenPassword(hidden)},
+            hidden = hidden,
+            keyboardType = KeyboardType.Password,
+            passwordMode = true,
+            errorMessage = if(!isPasswordValid)"Minimo 8 caracteres" else "La contraseña no coincide"){
             viewModel.onConfirmPasswordChange(it)
+            viewModel.confirmPasswordEmpty()
         }
         Spacer(modifier = Modifier.height(10.dp))
         Row(
@@ -92,10 +111,11 @@ fun RegisterSection(
             modifier = Modifier.fillMaxWidth()
         ) {
             RadioButton(
-                selected = false,
-                onClick = { },
+                selected = active,
+                onClick = {viewModel.activeRadioButton(active) },
                 colors = RadioButtonDefaults.colors(
-                    unselectedColor = Color.White
+                    unselectedColor = Color.White,
+                    selectedColor = Color.White
                 ),
                 )
             Text(
@@ -108,17 +128,22 @@ fun RegisterSection(
         Spacer(modifier = Modifier.height(5.dp))
         PrimaryButton(
             text = "Registrarse",
+            enabled = enabled && active,
             modifier = Modifier.fillMaxWidth()
         ){
-            if (password == confirmPassword){
-                viewModel.isNotError()
-                viewModel.register(email,password){
-                    navHostController.navigate(LoginScreens.Welcome.route)
+                viewModel.isEmail(email)
+                viewModel.isPassword(password)
+            if(isEmailValid && isPasswordValid) {
+                if (password == confirmPassword) {
+                    viewModel.isNotError()
+                    viewModel.register(email, password) {
+                        navHostController.navigate(LoginScreens.Welcome.route)
+                    }
+                } else {
+                    viewModel.isError()
                 }
-            }else{
-                viewModel.isError()
             }
-        }
+            }
         Spacer(modifier = Modifier.height(10.dp))
         DividerSpecial(
             text = "ya tienes cuenta?",
@@ -129,7 +154,7 @@ fun RegisterSection(
             text = "Iniciar Sesión",
             modifier = Modifier.fillMaxWidth()
         ){
-
+            navHostController.navigate(LoginScreens.Login.route)
         }
     }
 }

@@ -22,6 +22,10 @@ fun LoginScreen(
 ) {
     val email: String by viewModel.email.observeAsState(initial = "")
     val password: String by viewModel.password.observeAsState(initial = "")
+    val isEnabled: Boolean by viewModel.enabled.observeAsState(initial = false)
+    val isEmailValid: Boolean by viewModel.emailValid.observeAsState(initial = true)
+    val isPasswordValid: Boolean by viewModel.passwordValid.observeAsState(initial = true)
+    val hidden: Boolean by viewModel.hidden.observeAsState(initial = true)
 
     Column( modifier =  modifier.fillMaxSize()) {
         WelcomeLoginSection(text = "Bienvenido \n de vuelta")
@@ -30,6 +34,10 @@ fun LoginScreen(
             email = email,
             password = password,
             navHostController = navHostController,
+            enabled = isEnabled,
+            isEmailValid = isEmailValid,
+            isPasswordValid = isPasswordValid,
+            hidden = hidden,
             viewModel = viewModel
         )
     }

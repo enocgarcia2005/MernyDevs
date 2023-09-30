@@ -1,6 +1,7 @@
 package com.example.cooksy.screens.login
 
 import android.util.Log
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,37 @@ class LoginScreenViewModel:ViewModel() {
     private val _error = MutableLiveData<Boolean>()
     val error: LiveData<Boolean> = _error
 
+    private val _emailValid = MutableLiveData<Boolean>()
+    val emailValid: LiveData<Boolean> = _emailValid
+
+    private val _passwordValid = MutableLiveData<Boolean>()
+    val passwordValid: LiveData<Boolean> = _passwordValid
+
+    private val _enabled = MutableLiveData<Boolean>()
+    val enabled: LiveData<Boolean> = _enabled
+
+    private val _active = MutableLiveData<Boolean>()
+    val active: LiveData<Boolean> = _active
+
+    private val _hidden = MutableLiveData<Boolean>()
+    val hidden: LiveData<Boolean> = _hidden
+
+
+    fun activeRadioButton(value:Boolean){
+        _active.value = !value
+    }
+    fun hiddenPassword(value:Boolean){
+        _hidden.value = !value
+    }
+    fun isEnabled(){
+        _enabled.value = !_email.value.isNullOrEmpty() &&
+                !_password.value.isNullOrEmpty()
+    }
+     fun confirmPasswordEmpty(){
+         _enabled.value = !_confirmPassword.value.isNullOrEmpty() &&
+                 !_email.value.isNullOrEmpty() &&
+                 !_password.value.isNullOrEmpty()
+     }
     fun isError(){
         _error.value = true
     }
@@ -40,6 +72,15 @@ class LoginScreenViewModel:ViewModel() {
     fun onConfirmPasswordChange(confirmPassword:String){
         _confirmPassword.value = confirmPassword
     }
+
+    fun isEmail(email: String) {
+        _emailValid.value = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    fun isPassword(password: String) {
+        _passwordValid.value = password.length > 7
+    }
+
     fun logIn(
         email:String,
         password:String,
