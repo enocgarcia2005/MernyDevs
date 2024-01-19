@@ -15,15 +15,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
+private val darkColorScheme = darkColorScheme(
+    primary = BlueDark,
+    secondary = BlueDark,
     tertiary = Pink80
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
+private val lightColorScheme = lightColorScheme(
+    primary = BlueDark,
+    secondary = BlueDark,
     tertiary = Pink40
 
     /* Other default colors to override
@@ -50,8 +50,8 @@ fun CooksyTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkColorScheme
+        else -> lightColorScheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
